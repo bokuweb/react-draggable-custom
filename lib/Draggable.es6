@@ -170,7 +170,7 @@ export default class Draggable extends React.Component {
     this.setState({dragging: false}); // prevents invariant if unmounted while dragging
   }
 
-  componentWillUpdate(next) {
+  componentWillReceiveProps(next) {
     let { clientX, clientY } = this.state;
     if (next.x !== clientX) this.setState({ clientX: next.x });
     if (next.y !== clientY) this.setState({ clientY: next.y });
