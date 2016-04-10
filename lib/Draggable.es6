@@ -172,8 +172,10 @@ export default class Draggable extends React.Component {
 
   componentWillReceiveProps(next) {
     let { clientX, clientY } = this.state;
-    if (next.x !== clientX) this.setState({ clientX: next.x });
-    if (next.y !== clientY) this.setState({ clientY: next.y });
+    if (next.x !== clientX　|| next.y !== clientY) {
+      [clientX, clientY] = getBoundPosition(this, next.x, next.y);
+      this.setState({ clientX, clientY });
+    }
   }
 
   onDragStart: CoreEventHandler = (e, coreEvent) => {

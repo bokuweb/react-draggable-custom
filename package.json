@@ -43,7 +43,6 @@
     "lodash": "^3.10.1",
     "open": "0.0.5",
     "phantomjs": "^1.9.18",
-    "pre-commit": "^1.1.2",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "semver": "^5.0.3",

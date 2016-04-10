@@ -240,8 +240,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var clientX = _state.clientX;
 	      var clientY = _state.clientY;
 	
-	      if (next.x !== clientX) this.setState({ clientX: next.x });
-	      if (next.y !== clientY) this.setState({ clientY: next.y });
+	      if (next.x !== clientX || next.y !== clientY) {
+	        var _getBoundPosition3 = (0, _positionFns.getBoundPosition)(this, next.x, next.y);
+	
+	        var _getBoundPosition4 = _slicedToArray(_getBoundPosition3, 2);
+	
+	        clientX = _getBoundPosition4[0];
+	        clientY = _getBoundPosition4[1];
+	
+	        this.setState({ clientX: clientX, clientY: clientY });
+	      }
 	    }
 	  }, {
 	    key: 'render',
