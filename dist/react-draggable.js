@@ -245,10 +245,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // has a clean slate.
 	      var transformOpts = {
 	        // Set left if horizontal drag is enabled
-	        x: (0, _positionFns.canDragX)(this) ? this.state.clientX : this.props.start.x,
+	        x: this.props.passCoordinate ? this.props.x : (0, _positionFns.canDragX)(this) ? this.state.clientX : this.props.start.x,
 	
 	        // Set top if vertical drag is enabled
-	        y: (0, _positionFns.canDragY)(this) ? this.state.clientY : this.props.start.y
+	        y: this.props.passCoordinate ? this.props.y : (0, _positionFns.canDragY)(this) ? this.state.clientY : this.props.start.y
 	      };
 	
 	      // If this element was SVG, we use the `transform` attribute.
@@ -389,7 +389,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  axis: 'both',
 	  bounds: false,
 	  start: { x: 0, y: 0 },
-	  zIndex: NaN
+	  zIndex: NaN,
+	  passCoordinate: false,
+	  x: 0,
+	  y: 0
 	});
 	exports.default = Draggable;
 
@@ -1001,6 +1004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, _this.handleDrag = function (e) {
 	      // Return if this is a touch event, but not the correct one for this element
 	      if (e.targetTouches && e.targetTouches[0].identifier !== _this.state.touchIdentifier) return;
+	      if (_this.props.disabled) return;
 	
 	      var _getControlPosition2 = (0, _positionFns.getControlPosition)(e);
 	
