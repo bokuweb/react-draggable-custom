@@ -61,5 +61,9 @@
   },
   "directories": {
     "example": "example"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/bokuweb/react-draggable-custom/issues"
+  },
+  "homepage": "https://github.com/bokuweb/react-draggable-custom#readme"
 }
