@@ -234,8 +234,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ dragging: false }); // prevents invariant if unmounted while dragging
 	    }
 	  }, {
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate(next) {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(next) {
 	      var _state = this.state;
 	      var clientX = _state.clientX;
 	      var clientY = _state.clientY;
