@@ -2,6 +2,8 @@
 
 A simple component for making elements draggable.
 
+forked from mzabriskie/react-draggable
+
 [View the Changelog](CHANGELOG.md)
 
 ### Demo

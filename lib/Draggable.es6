@@ -137,7 +137,10 @@ export default class Draggable extends React.Component {
     axis: 'both',
     bounds: false,
     start: {x: 0, y: 0},
-    zIndex: NaN
+    zIndex: NaN,
+    passCoordinate: false,
+    x: 0,
+    y: 0
   };
 
   state: DraggableState = {
@@ -247,14 +250,18 @@ export default class Draggable extends React.Component {
     // has a clean slate.
     const transformOpts = {
       // Set left if horizontal drag is enabled
-      x: canDragX(this) ?
-        this.state.clientX :
-        this.props.start.x,
-
+      x: this.props.passCoordinate ?
+         this.props.x :
+         (canDragX(this) ?
+         this.state.clientX :
+         this.props.start.x),
+ 
       // Set top if vertical drag is enabled
-      y: canDragY(this) ?
-        this.state.clientY :
-        this.props.start.y
+      y: this.props.passCoordinate ?
+         this.props.y :
+         (canDragY(this) ?
+         this.state.clientY :
+         this.props.start.y)
     };
 
     // If this element was SVG, we use the `transform` attribute.

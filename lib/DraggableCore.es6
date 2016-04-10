@@ -311,7 +311,7 @@ export default class DraggableCore extends React.Component {
   handleDrag: EventHandler = (e) => {
     // Return if this is a touch event, but not the correct one for this element
     if (e.targetTouches && (e.targetTouches[0].identifier !== this.state.touchIdentifier)) return;
-
+    if (this.props.disabled) return;
     let {clientX, clientY} = getControlPosition(e);
 
     // Snap to grid if prop has been provided
