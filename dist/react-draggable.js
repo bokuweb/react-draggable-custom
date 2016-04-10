@@ -234,6 +234,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({ dragging: false }); // prevents invariant if unmounted while dragging
 	    }
 	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(next) {
+	      var _state = this.state;
+	      var clientX = _state.clientX;
+	      var clientY = _state.clientY;
+	
+	      if (next.x !== clientX) this.setState({ clientX: next.x });
+	      if (next.y !== clientY) this.setState({ clientY: next.y });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var style = {},
@@ -245,10 +255,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // has a clean slate.
 	      var transformOpts = {
 	        // Set left if horizontal drag is enabled
-	        x: this.props.passCoordinate ? this.props.x : (0, _positionFns.canDragX)(this) ? this.state.clientX : this.props.start.x,
+	        x: (0, _positionFns.canDragX)(this) ? this.state.clientX : this.props.start.x,
 	
 	        // Set top if vertical drag is enabled
-	        y: this.props.passCoordinate ? this.props.y : (0, _positionFns.canDragY)(this) ? this.state.clientY : this.props.start.y
+	        y: (0, _positionFns.canDragY)(this) ? this.state.clientY : this.props.start.y
 	      };
 	
 	      // If this element was SVG, we use the `transform` attribute.
@@ -390,7 +400,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  bounds: false,
 	  start: { x: 0, y: 0 },
 	  zIndex: NaN,
-	  passCoordinate: false,
 	  x: 0,
 	  y: 0
 	});

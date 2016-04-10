@@ -52,10 +52,6 @@
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1"
   },
-  "precommit": [
-    "lint",
-    "test"
-  ],
   "dependencies": {
     "classnames": "^2.2.0"
   },

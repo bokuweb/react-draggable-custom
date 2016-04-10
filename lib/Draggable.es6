@@ -138,7 +138,6 @@ export default class Draggable extends React.Component {
     bounds: false,
     start: {x: 0, y: 0},
     zIndex: NaN,
-    passCoordinate: false,
     x: 0,
     y: 0
   };
@@ -169,6 +168,12 @@ export default class Draggable extends React.Component {
 
   componentWillUnmount() {
     this.setState({dragging: false}); // prevents invariant if unmounted while dragging
+  }
+
+  componentWillUpdate(next) {
+    let { clientX, clientY } = this.state;
+    if (next.x !== clientX) this.setState({ clientX: next.x });
+    if (next.y !== clientY) this.setState({ clientY: next.y });
   }
 
   onDragStart: CoreEventHandler = (e, coreEvent) => {
@@ -250,16 +255,12 @@ export default class Draggable extends React.Component {
     // has a clean slate.
     const transformOpts = {
       // Set left if horizontal drag is enabled
-      x: this.props.passCoordinate ?
-         this.props.x :
-         (canDragX(this) ?
+      x: (canDragX(this) ?
          this.state.clientX :
          this.props.start.x),
  
       // Set top if vertical drag is enabled
-      y: this.props.passCoordinate ?
-         this.props.y :
-         (canDragY(this) ?
+      y: (canDragY(this) ?
          this.state.clientY :
          this.props.start.y)
     };
