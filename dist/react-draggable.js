@@ -119,7 +119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(Draggable, _React$Component);
 	
 	  function Draggable() {
-	    var _Object$getPrototypeO;
+	    var _ref;
 	
 	    var _temp, _this, _ret;
 	
@@ -129,7 +129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      args[_key] = arguments[_key];
 	    }
 	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Draggable)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Draggable.__proto__ || Object.getPrototypeOf(Draggable)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	      // Whether or not we are currently dragging.
 	      dragging: false,
 	
@@ -167,8 +167,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Keep within bounds.
 	      if (_this.props.bounds) {
 	        // Save original x and y.
-	        var _clientX = newState.clientX;
-	        var _clientY = newState.clientY;
+	        var _clientX = newState.clientX,
+	            _clientY = newState.clientY;
 	
 	        // Add slack to the values used to calculate bound position. This will ensure that if
 	        // we start removing slack, the element won't react to it right away until it's been
@@ -179,9 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        // Get bound position. This will ceil/floor the x and y within the boundaries.
 	
-	
 	        // Recalculate slack by noting how much was shaved by the boundPosition handler.
-	
 	        var _getBoundPosition = (0, _positionFns.getBoundPosition)(_this, newState.clientX, newState.clientY);
 	
 	        var _getBoundPosition2 = _slicedToArray(_getBoundPosition, 2);
@@ -236,9 +234,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(next) {
-	      var _state = this.state;
-	      var clientX = _state.clientX;
-	      var clientY = _state.clientY;
+	      var _state = this.state,
+	          clientX = _state.clientX,
+	          clientY = _state.clientY;
 	
 	      if (next.x !== clientX || next.y !== clientY) {
 	        var _getBoundPosition3 = (0, _positionFns.getBoundPosition)(this, next.x, next.y);
@@ -597,16 +595,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function createCSSTransform(_ref) {
-	  var x = _ref.x;
-	  var y = _ref.y;
+	  var x = _ref.x,
+	      y = _ref.y;
 	
 	  // Replace unitless items with px
 	  return _defineProperty({}, (0, _getPrefix.browserPrefixToKey)('transform', _getPrefix2.default), 'translate(' + x + 'px,' + y + 'px)');
 	}
 	
 	function createSVGTransform(_ref3) {
-	  var x = _ref3.x;
-	  var y = _ref3.y;
+	  var x = _ref3.x,
+	      y = _ref3.y;
 	
 	  return 'translate(' + x + ',' + y + ')';
 	}
@@ -629,7 +627,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function styleHacks() {
-	  var childStyle = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var childStyle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
 	  // Workaround IE pointer events; see #51
 	  // https://github.com/mzabriskie/react-draggable/issues/51#issuecomment-103488278
@@ -727,10 +725,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.getPrefix = getPrefix;
 	exports.browserPrefixToKey = browserPrefixToKey;
 	exports.browserPrefixToStyle = browserPrefixToStyle;
-	
 	var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 	function getPrefix() {
-	  var prop = arguments.length <= 0 || arguments[0] === undefined ? 'transform' : arguments[0];
+	  var prop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'transform';
 	
 	  // Checking specifically for 'window.document' is for pseudo-browser server-side
 	  // environments that define 'window' as the global context.
@@ -862,7 +859,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Get {clientX, clientY} positions from event.
 	function getControlPosition(e) {
-	  var position = e.targetTouches && e.targetTouches[0] || e;
+	  var position = e.targetTouches && e.targetTouches[0] || e.changedTouches && e.changedTouches[0] || e;
+	
 	  return {
 	    clientX: position.clientX,
 	    clientY: position.clientY
@@ -943,7 +941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(DraggableCore, _React$Component);
 	
 	  function DraggableCore() {
-	    var _Object$getPrototypeO;
+	    var _ref;
 	
 	    var _temp, _this, _ret;
 	
@@ -953,7 +951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      args[_key] = arguments[_key];
 	    }
 	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DraggableCore)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DraggableCore.__proto__ || Object.getPrototypeOf(DraggableCore)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	      dragging: false,
 	      // Used while dragging to determine deltas.
 	      lastX: null, lastY: null
@@ -982,12 +980,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      // Get the current drag point from the event. This is used as the offset.
 	
-	      var _getControlPosition = (0, _positionFns.getControlPosition)(e);
-	
-	      var clientX = _getControlPosition.clientX;
-	      var clientY = _getControlPosition.clientY;
+	      var _getControlPosition = (0, _positionFns.getControlPosition)(e),
+	          clientX = _getControlPosition.clientX,
+	          clientY = _getControlPosition.clientY;
 	
 	      // Create an event object with all the data parents need to make a decision here.
+	
 	
 	      var coreEvent = (0, _domFns.createCoreEvent)(_this, clientX, clientY);
 	
@@ -1023,12 +1021,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (e.targetTouches && e.targetTouches[0].identifier !== _this.state.touchIdentifier) return;
 	      if (_this.props.disabled) return;
 	
-	      var _getControlPosition2 = (0, _positionFns.getControlPosition)(e);
-	
-	      var clientX = _getControlPosition2.clientX;
-	      var clientY = _getControlPosition2.clientY;
+	      var _getControlPosition2 = (0, _positionFns.getControlPosition)(e),
+	          clientX = _getControlPosition2.clientX,
+	          clientY = _getControlPosition2.clientY;
 	
 	      // Snap to grid if prop has been provided
+	
 	
 	      if (Array.isArray(_this.props.grid)) {
 	        var deltaX = clientX - _this.state.lastX,
@@ -1070,10 +1068,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Remove user-select hack
 	      if (_this.props.enableUserSelectHack) (0, _domFns.removeUserSelectStyles)();
 	
-	      var _getControlPosition3 = (0, _positionFns.getControlPosition)(e);
-	
-	      var clientX = _getControlPosition3.clientX;
-	      var clientY = _getControlPosition3.clientY;
+	      var _getControlPosition3 = (0, _positionFns.getControlPosition)(e),
+	          clientX = _getControlPosition3.clientX,
+	          clientY = _getControlPosition3.clientY;
 	
 	      var coreEvent = (0, _domFns.createCoreEvent)(_this, clientX, clientY);
 	
