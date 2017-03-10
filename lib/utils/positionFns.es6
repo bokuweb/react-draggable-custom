@@ -69,7 +69,9 @@ export function canDragY(draggable: React.Component): boolean {
 
 // Get {clientX, clientY} positions from event.
 export function getControlPosition(e: Event): ControlPosition {
-  let position = (e.targetTouches && e.targetTouches[0]) || e;
+  let position = (e.targetTouches && e.targetTouches[0]) ||
+    e.changedTouches && e.changedTouches[0] || e;
+
   return {
     clientX: position.clientX,
     clientY: position.clientY
