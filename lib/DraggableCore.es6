@@ -328,7 +328,6 @@ export default class DraggableCore extends React.Component {
         deltaY = Math.round(deltaY / parentScale);
       }
       clientX = this.state.lastX + deltaX, clientY = this.state.lastY + deltaY;
-      console.log('move by scale', clientX, clientY, this.state.lastX, this.state.lastY);
     }
 
     const coreEvent = createCoreEvent(this, clientX, clientY);
