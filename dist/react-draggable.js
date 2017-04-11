@@ -1390,7 +1390,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function log() {
 	  var _console;
 	
-	  if (true) (_console = console).log.apply(_console, arguments);
+	  if ((undefined)) (_console = console).log.apply(_console, arguments);
 	}
 
 /***/ }
