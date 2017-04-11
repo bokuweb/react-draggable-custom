@@ -2,7 +2,8 @@
 
 A simple component for making elements draggable.
 
-forked from mzabriskie/react-draggable
+forked from bokuweb/react-draggable-custom
+(add parentScaled config)
 
 [View the Changelog](CHANGELOG.md)
 
