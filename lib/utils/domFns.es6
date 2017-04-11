@@ -162,13 +162,14 @@ export function createCoreEvent(draggable: DraggableCore, clientX: number, clien
 
 // Create an event exposed by <Draggable>
 export function createUIEvent(draggable: Draggable, coreEvent: CoreEvent): UIEvent {
+  const { parentScale = 1 } = draggable.props;
   return {
     node: ReactDOM.findDOMNode(draggable),
     position: {
-      left: draggable.state.clientX + coreEvent.position.deltaX,
-      top: draggable.state.clientY + coreEvent.position.deltaY
+      left: draggable.state.clientX + coreEvent.position.deltaX / parentScale,
+      top: draggable.state.clientY + coreEvent.position.deltaY / parentScale
     },
-    deltaX: coreEvent.position.deltaX,
-    deltaY: coreEvent.position.deltaY
+    deltaX: coreEvent.position.deltaX / parentScale,
+    deltaY: coreEvent.position.deltaY / parentScale
   };
 }

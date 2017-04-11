@@ -196,6 +196,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        uiEvent.deltaY = newState.clientY - _this.state.clientY;
 	      }
 	
+	      (0, _log2.default)('Draggable: onDrag uiEvent: %j', uiEvent);
+	
 	      // Short-circuit if user's callback killed it.
 	      var shouldUpdate = _this.props.onDrag(e, uiEvent);
 	      if (shouldUpdate === false) return false;
@@ -399,7 +401,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  className: _shims.dontSetMe,
 	  style: _shims.dontSetMe,
-	  transform: _shims.dontSetMe
+	  transform: _shims.dontSetMe,
+	
+	  parentScale: _react.PropTypes.number
 	});
 	Draggable.defaultProps = _extends({}, _DraggableCore2.default.defaultProps, {
 	  axis: 'both',
@@ -407,7 +411,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  start: { x: 0, y: 0 },
 	  zIndex: NaN,
 	  x: 0,
-	  y: 0
+	  y: 0,
+	  parentScale: 1
 	});
 	exports.default = Draggable;
 
@@ -662,14 +667,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Create an event exposed by <Draggable>
 	function createUIEvent(draggable, coreEvent) {
+	  var _draggable$props$pare = draggable.props.parentScale,
+	      parentScale = _draggable$props$pare === undefined ? 1 : _draggable$props$pare;
+	
 	  return {
 	    node: _reactDom2.default.findDOMNode(draggable),
 	    position: {
-	      left: draggable.state.clientX + coreEvent.position.deltaX,
-	      top: draggable.state.clientY + coreEvent.position.deltaY
+	      left: draggable.state.clientX + coreEvent.position.deltaX / parentScale,
+	      top: draggable.state.clientY + coreEvent.position.deltaY / parentScale
 	    },
-	    deltaX: coreEvent.position.deltaX,
-	    deltaY: coreEvent.position.deltaY
+	    deltaX: coreEvent.position.deltaX / parentScale,
+	    deltaY: coreEvent.position.deltaY / parentScale
 	  };
 	}
 
@@ -1040,6 +1048,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        deltaY = _snapToGrid2[1];
 	
 	        if (!deltaX && !deltaY) return; // skip useless drag
+	        var parentScale = _this.props.parentScale;
+	
+	        if (parentScale !== 1) {
+	          deltaX = Math.round(deltaX / parentScale);
+	          deltaY = Math.round(deltaY / parentScale);
+	        }
 	        clientX = _this.state.lastX + deltaX, clientY = _this.state.lastY + deltaY;
 	      }
 	
@@ -1343,7 +1357,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  className: _shims.dontSetMe,
 	  style: _shims.dontSetMe,
-	  transform: _shims.dontSetMe
+	  transform: _shims.dontSetMe,
+	
+	  parentScale: _react.PropTypes.number
 	};
 	DraggableCore.defaultProps = {
 	  allowAnyClick: false, // by default only accept left click
@@ -1356,7 +1372,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onStart: function onStart() {},
 	  onDrag: function onDrag() {},
 	  onStop: function onStop() {},
-	  onMouseDown: function onMouseDown() {}
+	  onMouseDown: function onMouseDown() {},
+	  parentScale: 1
 	};
 	exports.default = DraggableCore;
 

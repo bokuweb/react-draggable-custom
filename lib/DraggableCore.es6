@@ -213,7 +213,9 @@ export default class DraggableCore extends React.Component {
      */
     className: dontSetMe,
     style: dontSetMe,
-    transform: dontSetMe
+    transform: dontSetMe,
+
+    parentScale: PropTypes.number
   };
 
   static defaultProps = {
@@ -227,7 +229,8 @@ export default class DraggableCore extends React.Component {
     onStart: function(){},
     onDrag: function(){},
     onStop: function(){},
-    onMouseDown: function(){}
+    onMouseDown: function(){},
+    parentScale: 1
   };
 
   state: CoreState = {
@@ -319,6 +322,11 @@ export default class DraggableCore extends React.Component {
       let deltaX = clientX - this.state.lastX, deltaY = clientY - this.state.lastY;
       [deltaX, deltaY] = snapToGrid(this.props.grid, deltaX, deltaY);
       if (!deltaX && !deltaY) return; // skip useless drag
+      const { parentScale } = this.props;
+      if (parentScale !== 1) {
+        deltaX = Math.round(deltaX / parentScale);
+        deltaY = Math.round(deltaY / parentScale);
+      }
       clientX = this.state.lastX + deltaX, clientY = this.state.lastY + deltaY;
     }
 

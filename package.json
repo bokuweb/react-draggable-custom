@@ -1,6 +1,6 @@
 {
-  "name": "@bokuweb/react-draggable-custom",
-  "version": "1.4.2",
+  "name": "react-draggable-custom",
+  "version": "1.4.5",
   "description": "React draggable component",
   "main": "dist/react-draggable.js",
   "browser": "dist/react-draggable.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bokuweb/react-draggable-custom.git"
+    "url": "git+https://github.com/lokewei/react-draggable-custom.git"
   },
   "keywords": [
     "react",
     "draggable",
     "react-component"
   ],
-  "author": "bokuweb",
+  "author": "lokewei",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -58,7 +58,7 @@
     "example": "example"
   },
   "bugs": {
-    "url": "https://github.com/bokuweb/react-draggable-custom/issues"
+    "url": "https://github.com/lokewei/react-draggable-custom/issues"
   },
-  "homepage": "https://github.com/bokuweb/react-draggable-custom#readme"
+  "homepage": "https://github.com/lokewei/react-draggable-custom#readme"
 }
