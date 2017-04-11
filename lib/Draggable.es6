@@ -129,7 +129,9 @@ export default class Draggable extends React.Component {
      */
     className: dontSetMe,
     style: dontSetMe,
-    transform: dontSetMe
+    transform: dontSetMe,
+
+    parentScale: PropTypes.number
   };
 
   static defaultProps = {
@@ -139,7 +141,8 @@ export default class Draggable extends React.Component {
     start: {x: 0, y: 0},
     zIndex: NaN,
     x: 0,
-    y: 0
+    y: 0,
+    parentScale: 1
   };
 
   state: DraggableState = {
@@ -224,6 +227,8 @@ export default class Draggable extends React.Component {
       uiEvent.deltaX = newState.clientX - this.state.clientX;
       uiEvent.deltaY = newState.clientY - this.state.clientY;
     }
+
+    log('Draggable: onDrag uiEvent: %j', uiEvent);
 
     // Short-circuit if user's callback killed it.
     let shouldUpdate = this.props.onDrag(e, uiEvent);
